@@ -1,5 +1,7 @@
 package com.hys.mybatis.mapper.mapper;
 
+import com.hys.annotation.EsOperator;
+import com.hys.annotation.EsOperatorEnum;
 import com.hys.mybatis.mapper.entity.MythInventory;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
@@ -21,5 +23,6 @@ import java.util.List;
 public interface MythInventoryDao extends BaseMapper<MythInventory> {
 
     @Select("select * from myth_inventory where trans_id = #{id}")
+    @EsOperator(type = EsOperatorEnum.DEL)
     public List<MythInventory> queryForSql(@Param("id")String id);
 }
