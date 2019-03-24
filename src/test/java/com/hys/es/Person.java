@@ -8,6 +8,7 @@ import org.springframework.data.elasticsearch.annotations.InnerField;
 import org.springframework.data.elasticsearch.annotations.MultiField;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -46,5 +47,8 @@ public class Person {
     @Field(type = FieldType.Nested)
     private Province province;
 
+
+    @Field(type = FieldType.Nested)
+    private List<Tag> tags;
 
 }
