@@ -41,4 +41,10 @@ public class Person {
 
     @Field(type = FieldType.Date,index = false)
     private Date birthDay;
+
+
+    @Field(type = FieldType.Nested)
+    private Province province;
+
+
 }

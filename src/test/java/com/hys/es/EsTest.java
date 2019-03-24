@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.query.DeleteQuery;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
 import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
@@ -28,6 +29,7 @@ import java.util.Random;
 import java.util.UUID;
 
 import static org.elasticsearch.index.query.QueryBuilders.boolQuery;
+import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
 import static org.elasticsearch.index.query.QueryBuilders.matchPhraseQuery;
 import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
 import static org.elasticsearch.index.query.QueryBuilders.multiMatchQuery;
@@ -72,7 +74,7 @@ public class EsTest {
 
             String  sex = new Random().nextBoolean()?"male": "female";
             personList.add(new Person().setId(UUID.randomUUID().toString()).setBirthDay(randomDate
-            ).setChnName("郝亚森"+i).setEnName("ahys"+i).setIdCard(UUID.randomUUID().toString()).setSex(sex));
+            ).setChnName("郝亚森"+i).setEnName("ahys"+i).setIdCard(UUID.randomUUID().toString()).setSex(sex).setProvince(new Province().setEnName("HeBei").setChnName("河北")));
         }
 
         List<IndexQuery> queries = new ArrayList<IndexQuery>();
@@ -83,6 +85,14 @@ public class EsTest {
         elasticsearchTemplate.bulkIndex(queries);
     }
 
+    @Test
+    public void del(){
+        DeleteQuery deleteQuery = new DeleteQuery();
+        deleteQuery.setIndex("com.hys.index");
+        deleteQuery.setType("person");
+        deleteQuery.setQuery(matchAllQuery());
+        elasticsearchTemplate.delete(deleteQuery);
+    }
 
     @Test
     public void query(){
