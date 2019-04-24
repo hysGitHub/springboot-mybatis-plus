@@ -2,6 +2,8 @@ package com.hys.es;
 
 import com.hys.mybatis.MybatisApplication;
 
+import com.hys.utils.PoValidateUtils;
+import com.hys.utils.ServiceResponse;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.TermQueryBuilder;
@@ -79,6 +81,7 @@ public class EsTest {
 
         List<IndexQuery> queries = new ArrayList<IndexQuery>();
         for (Person person : personList) {
+           // ServiceResponse serviceResponse = PoValidateUtils.fastValidateResponse(person);
             IndexQuery indexQuery = new IndexQueryBuilder().withId(person.getId()).withObject(person).build();
             queries.add(indexQuery);
         }
@@ -109,5 +112,7 @@ public class EsTest {
             System.out.println(f);
         });
     }
+
+
 
 }

@@ -1,0 +1,16 @@
+version: '2.2'
+services:
+  elasticsearch:
+    build: elasticsearch:6.6.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+    ports:
+      - 9200:9200
+      - 9300:9300
+
+  kibana:
+    image: kibana:6.6.0
+    container_name: kibana
+    ports:
+      - 5601:5601

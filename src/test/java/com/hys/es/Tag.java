@@ -14,8 +14,8 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class Tag {
 
-    @Field(index = false)
-    private Long id;
+  /*  @Field()
+    private Long id;*/
 
     @Field(type = FieldType.Text,searchAnalyzer = "standard",analyzer = "standard")
     private String path;
